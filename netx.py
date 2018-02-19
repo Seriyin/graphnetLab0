@@ -25,12 +25,17 @@ class Grapher:
                 sampleset += len(G.edges)
         return sampleset
 
-graph = Grapher()
-samplemat = []
-for i in range(0, stop=100, step=5):
-    ss = graph.sample_graphs(30,i)
-    samplemat += ss
-sm = map(sum(),samplemat)
-f = pyplot.figure()
-pyplot.plot(range(0,stop=100,step=5),sm)
-pyplot.show()
+
+def main():
+    graph = Grapher()
+    samplemat = []
+    for i in range(0, stop=100, step=5):
+        ss = graph.sample_graphs(30,i)
+        samplemat += ss
+    sm = map(sum(),samplemat)
+    f = pyplot.figure()
+    pyplot.plot(range(0,stop=100,step=5),sm)
+    pyplot.show()
+    pyplot.savefig('graphsampling.pdf')
+
+main()
