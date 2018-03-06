@@ -31,7 +31,7 @@ def main():
         samplemat.append(graph.sample_graphs(30,i))
     f = pyplot.figure()
     pyplot.plot(range(5, 100, 5),samplemat)
-    pyplot.show()
     pyplot.savefig('graphsampling.pdf')
+    pyplot.close(f)
 
 main()
