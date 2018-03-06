@@ -1,40 +1,36 @@
 import networkx as nx
-from random import choices
-from itertools import product
+from random import choice
+from itertools import permutations
 from matplotlib import pyplot
 
 class Grapher:
 
     def generate_n(self, n):
-        G = nx.Graph()
-        G.add_nodes_from(range(0,n))
-        return G
+        self.graph = nx.Graph()
+        self.graph.add_nodes_from(range(0,n))
     
-    def build_connected(self, G):
-        for x in choices(product(range(0,len(G))),k=len(G)*len(G)):
-            G.add_edge(x)
-            if nx.is_connected(G) :
-                break
-        return G
+    def build_connected(self):
+        prod = list(permutations(range(0,len(self.graph)),2))
+        while not nx.is_connected(self.graph) :
+            (x,y) = choice(prod)
+            self.graph.add_edge(x,y)
 
     def sample_graphs(self, samples, size):
-        sampleset = []
+        sampleset = 0
         for _ in range(0,samples) :
-            G = self.generate_n(size)
-            if nx.is_connected(self.build_connected(G)) :
-                sampleset += len(G.edges)
-        return sampleset
+            self.generate_n(size)
+            self.build_connected()
+            sampleset += len(self.graph.edges)
+        return sampleset/samples
 
 
 def main():
     graph = Grapher()
     samplemat = []
-    for i in range(0, stop=100, step=5):
-        ss = graph.sample_graphs(30,i)
-        samplemat += ss
-    sm = map(sum(),samplemat)
+    for i in range(5, 100, 5):
+        samplemat.append(graph.sample_graphs(30,i))
     f = pyplot.figure()
-    pyplot.plot(range(0,stop=100,step=5),sm)
+    pyplot.plot(range(5, 100, 5),samplemat)
     pyplot.show()
     pyplot.savefig('graphsampling.pdf')
 
