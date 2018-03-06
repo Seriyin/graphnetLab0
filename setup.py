@@ -13,14 +13,14 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'graphnetLab0'
-DESCRIPTION = 'Trying to generate single components in random graphs.'
+DESCRIPTION = 'Trying to generate single components (Erdos-Renyi model) in random graphs.'
 URL = 'https://github.com/Seriyin/graphnetLab0'
 EMAIL = 'redan.blue27@gmail.com'
 AUTHOR = 'André Diogo'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-     'networkx',# 'maya', 'records',
+     'networkx', 'matplotlib'# 'maya', 'records',
 ]
 
 # The rest you shouldn't have to touch too much :)
