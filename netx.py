@@ -13,6 +13,7 @@ class Grapher:
         prod = list(permutations(range(0,len(self.graph)),2))
         while not nx.is_connected(self.graph) :
             (x,y) = choice(prod)
+            prod.remove(x,y)
             self.graph.add_edge(x,y)
 
     def sample_graphs(self, samples, size):
@@ -30,6 +31,9 @@ def main():
     for i in range(5, 100, 5):
         samplemat.append(graph.sample_graphs(30,i))
     f = pyplot.figure()
+    pyplot.xlabel("Number of nodes in graph")
+    pyplot.ylabel("Median of edges from 30 graph samples")
+    pyplot.title("Edges until graph is connected by node count")
     pyplot.plot(range(5, 100, 5),samplemat)
     pyplot.savefig('graphsampling.pdf')
     pyplot.close(f)
